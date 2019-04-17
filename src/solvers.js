@@ -18,8 +18,10 @@
 window.findNRooksSolution = function(n) {
 
   var board = new Board({n:n});
+
   
   console.log('board', board)
+  console.log('has row conflict', board.hasRowConflictAt(1))
 
   var solution = board;
 

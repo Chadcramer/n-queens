@@ -79,11 +79,33 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme00
+
+      // set a new var
+      // get the row set to new var
+      let row = this.get(rowIndex)
+      
+      // need a counter
+      let counter = 0;
+      // check if the row as a 1 in it
+      for(var i = 0; i < row.length; i++){
+        if(row[i] === 1){
+          counter++;
+        }
+      }
+      // if more that 1 one change the false to true
+      // return back true or false
+      if(counter > 1){
+        return true;
+      }
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      // get a list of keys
+      // check every key:row
+      // pass into hasrowconflicat function
+      // if it return true or false
       return false; // fixme
     },
 
