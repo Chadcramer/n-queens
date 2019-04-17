@@ -79,11 +79,10 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-
+    
       // set a new var
       // get the row set to new var
       let row = this.get(rowIndex)
-      
       // need a counter
       let counter = 0;
       // check if the row as a 1 in it
@@ -103,7 +102,14 @@
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
       // get a list of keys
+      let keys = Object.keys(this.attributes)
+      keys.pop();
       // check every key:row
+      for(var i = 0; i < keys.length; i++){
+        if(this.hasRowConflictAt(keys[i]) === true){
+          return true;
+        }
+      }
       // pass into hasrowconflicat function
       // if it return true or false
       return false; // fixme
@@ -116,12 +122,43 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      // set a col var
+      let col = [];
+      let index = colIndex;
+      // let keys = Object.keys(this.attributes)
+      let colCount = this.attributes.n;
+      let counter = 0;
+      
+      for(var i = 0; i < colCount; i++){
+        col.push(this.attributes[i][index])
+      }
+
+      for(var i = 0; i < col.length; i++){
+        if(col[i] === 1){
+          counter++;
+        }
+      }
+
+      if(counter > 1){
+        return true;
+      }
+
+      return false; 
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+
+      let keys = Object.keys(this.attributes);
+      keys.pop();
+
+      for(var i = 0; i < keys.length; i++){
+        if(this.hasColConflictAt(keys[i]) === true){
+          return true;
+        }
+      }
+
+      return false;
     },
 
 
