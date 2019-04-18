@@ -267,7 +267,6 @@
 
       // left - include middle row and all rows to the left
       if(index < 1){
-        console.log('left of minor diagonal')
         while(key > 0){
           diagonal = [];
           let indexIncrementer = index;
@@ -293,7 +292,6 @@
 
      // right side - one row at a time
       if(index > 0) {
-        console.log('right of minor diagonal')
         diagonal = [];
         let indexIncrementer = index;
         let keyDecrementer = key;
