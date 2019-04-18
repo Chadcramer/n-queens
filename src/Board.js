@@ -168,14 +168,44 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+    
+    let diagonal = [];
+    let index = majorDiagonalColumnIndexAtFirstRow;
+    let counter = 0;
+    let n = this.attributes.n;
+    let key = 0
+    
+    // left side
+    // if the index = 0 - left side
+    if(index === 0){
+      // set key 0, set index 0
+      while(key < n){
+        diagonal = [];
+        let indexIncrementer = index;
+        let keyIncrementer = key;
+        while(keyIncrementer < n){
+          // push into array the values
+          diagonal.push(this.attributes[indexIncrementer][keyIncrementer]);
+          indexIncrementer++;
+          keyIncrementer++;
+        }
+        key++
+        
+      }
+    }
+
+
+    // push in key,index
+    // increment key++, index++
+    // run till key === n-1
+    //set new key++
+    //repeat untill key === n-1
+
       // set a diagonal var as an empty array
-      let diagonal = [];
       // set index variable to majorDiagonalColumnIndexAtFirstRow
-      let index = majorDiagonalColumnIndexAtFirstRow;
+      
       
 ;      // let diagonalCount = n 
-      let n = this.attributes.n;
-      let counter = 0;
       for(let i = index; i < n; i++){
         diagonal.push(this.attributes[counter][i]);
         counter++;
