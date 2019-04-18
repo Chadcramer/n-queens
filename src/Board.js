@@ -173,83 +173,83 @@
     let index = majorDiagonalColumnIndexAtFirstRow;
     let counter = 0;
     let n = this.attributes.n;
-    let key = 0
-    
+    let key = 0;
+    // console.log('index', index)
+    // console.log('I AM INSIDE HASMAJOR')
     // left side
     // if the index = 0 - left side
-    if(index === 0){
+    if(index  < 1){
+      // console.log('i am inside major diagola left')
       // set key 0, set index 0
+      //repeat untill key === n-1
       while(key < n){
+        // set a diagonal var as an empty array
         diagonal = [];
         let indexIncrementer = index;
         let keyIncrementer = key;
+        counter = 0;
+        
+        // run till key === n-1
         while(keyIncrementer < n){
           // push into array the values
-          diagonal.push(this.attributes[indexIncrementer][keyIncrementer]);
+          // push in key,index
+          diagonal.push(this.attributes[keyIncrementer][indexIncrementer]);
+          // increment key++, index++
           indexIncrementer++;
           keyIncrementer++;
         }
+    
+      //set new key++
         key++
-        
+        for(let i = 0; i < diagonal.length; i++){
+          if(diagonal[i] === 1){
+            counter++;
+          }
+        }
+        if(counter > 1){
+          return true;
+        }
       }
     }
 
-
-    // push in key,index
-    // increment key++, index++
-    // run till key === n-1
-    //set new key++
-    //repeat untill key === n-1
-
-      // set a diagonal var as an empty array
-      // set index variable to majorDiagonalColumnIndexAtFirstRow
-      
-      
-;      // let diagonalCount = n 
-      for(let i = index; i < n; i++){
-        diagonal.push(this.attributes[counter][i]);
-        counter++;
+    // right side
+    if(index > 0){
+      diagonal = [];
+      let indexIncrementer = index;
+      let keyIncrementer = key;
+      while(indexIncrementer < n){
+        diagonal.push(this.attributes[keyIncrementer][indexIncrementer]);
+        indexIncrementer++;
+        keyIncrementer++;
       }
-      counter = 0;
       for(let i = 0; i < diagonal.length; i++){
         if(diagonal[i] === 1){
           counter++;
         }
       }
-
       if(counter > 1){
         return true;
       }
+    }
 
-      return false; // fixme
+
+      return false;
     },
+
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       // let keys = Object.keys(this.attributes
       let keys = Object.keys(this.attributes)
       keys.pop();
-      let n = this.attributes.n;
-
-      // middle line
-      // key = 0; index = 0
-      // run this until key/index < n
-
-      // left
-
-      // right
-
-
-
-      if(index < n){
-
+      for(var i = 0; i < keys.length; i++){
+        if(this.hasMajorDiagonalConflictAt(keys[i]) === true){
+          return true;
+        }
       }
 
-      if(keys < n){
-
-      }
-
-      return false; // fixme
+      
+      return false;
     },
 
 
@@ -259,6 +259,60 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
+      let diagonal = [];
+      let index = minorDiagonalColumnIndexAtFirstRow;
+      let counter = 0;
+      let n = this.attributes.n;
+      let key = n - 1;
+
+      // left - include middle row and all rows to the left
+      if(index < 1){
+        while(key > 0){
+          diagonal = [];
+          let indexIncrementer = index;
+          let keyDecrementer = key;
+          counter = 0;
+
+          while(keyDecrementer > 0){
+            diagonal.push(this.attributes[keyDecrementer][indexIncrementer]);
+            indexIncrementer++;
+            keyDecrementer--;
+          }
+          key--;
+          for(let i = 0; i < diagonal.length; i++){
+            if(diagonal[i] === 1){
+              counter++;
+            }
+          }
+          if(counter > 1){
+            return true;
+          }
+        }
+      }
+
+     // right side - one row at a time
+      if(index > 0) {
+        diagonal = [];
+        let indexIncrementer = index;
+        let keyDecrementer = key;
+        while(indexIncrementer < n){
+          diagonal.push(this.attributes[keyDecrementer][indexIncrementer]);
+          indexIncrementer++;
+          keyDecrementer--;
+        }
+        for(let i = 0; i < diagonal.length; i++){
+          if(diagonal[i] === 1){
+            counter++;
+          }
+        }
+        if(counter > 1){
+          return true;
+        }
+
+      }
+
+
+
       return false; // fixme
     },
 
