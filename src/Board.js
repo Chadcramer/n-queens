@@ -267,13 +267,14 @@
 
       // left - include middle row and all rows to the left
       if(index < 1){
+        console.log('left of minor diagonal')
         while(key > 0){
           diagonal = [];
           let indexIncrementer = index;
           let keyDecrementer = key;
           counter = 0;
 
-          while(keyDecrementer > 0){
+          while(keyDecrementer >= 0){
             diagonal.push(this.attributes[keyDecrementer][indexIncrementer]);
             indexIncrementer++;
             keyDecrementer--;
@@ -292,6 +293,7 @@
 
      // right side - one row at a time
       if(index > 0) {
+        console.log('right of minor diagonal')
         diagonal = [];
         let indexIncrementer = index;
         let keyDecrementer = key;
@@ -318,8 +320,17 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      let keys = Object.keys(this.attributes)
+      keys.pop();
+      for(var i = 0; i < keys.length; i++){
+        if(this.hasMinorDiagonalConflictAt(keys[i]) === true){
+          return true;
+        }
+      }
+      return false; 
     }
+
+
 
     /*--------------------  End of Helper Functions  ---------------------*/
 
